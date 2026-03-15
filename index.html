@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lehigh Valley AI Guys – Client Intake Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1B3A6B;   /* primary accent */
+      --navy-dark:  #142d55;   /* hover state    */
+      --navy-light: #e8eef7;   /* tint/bg        */
+      --charcoal:   #1e2230;   /* body text       */
+      --mid:        #5a6275;   /* secondary text  */
+      --border:     #d8dce6;
+      --white:      #ffffff;
+      --success:    #2e7d32;
+      --error:      #c0392b;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(27,58,107,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f6fb;
+      color: var(--charcoal);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ─── Header ────────────────────────────────────────────────────── */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 22px 24px;
+      text-align: center;
+    }
+
+    header .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    header .tagline {
+      font-size: 0.9rem;
+      font-weight: 400;
+      opacity: 0.82;
+      margin-top: 4px;
+      letter-spacing: 0.4px;
+    }
+
+    /* ─── Hero ──────────────────────────────────────────────────────── */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 52px 24px 44px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 800;
+      color: var(--charcoal);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: var(--navy);
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 18px auto 0;
+      color: var(--mid);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* ─── Main Wrapper ──────────────────────────────────────────────── */
+    .main {
+      max-width: 700px;
+      margin: 48px auto 80px;
+      padding: 0 16px;
+    }
+
+    /* ─── Progress Bar ──────────────────────────────────────────────── */
+    .progress-wrap {
+      margin-bottom: 32px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .progress-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .progress-count {
+      font-size: 0.82rem;
+      color: var(--mid);
+    }
+
+    .progress-track {
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--navy);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* Step dots */
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      justify-content: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+
+    .dot.done  { background: var(--navy); }
+    .dot.active { background: var(--navy); transform: scale(1.3); }
+
+    /* ─── Form Card ─────────────────────────────────────────────────── */
+    .form-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px 44px;
+    }
+
+    @media (max-width: 540px) {
+      .form-card { padding: 28px 20px; }
+    }
+
+    /* ─── Step ──────────────────────────────────────────────────────── */
+    .step {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .step.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-headline {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .step-desc {
+      font-size: 0.95rem;
+      color: var(--mid);
+      margin-bottom: 28px;
+    }
+
+    /* ─── Field Groups ───────────────────────────────────────────────── */
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 6px;
+    }
+
+    label .opt {
+      font-weight: 400;
+      color: var(--mid);
+      font-size: 0.82rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(27,58,107,0.10);
+    }
+
+    textarea { min-height: 100px; line-height: 1.6; }
+    textarea.tall { min-height: 140px; }
+
+    /* ─── Error State ────────────────────────────────────────────────── */
+    .field-error input,
+    .field-error textarea {
+      border-color: var(--error);
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 0.8rem;
+      color: var(--error);
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    .field-error .error-msg { display: block; }
+
+    /* ─── Checkboxes ─────────────────────────────────────────────────── */
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+
+    .check-item:hover {
+      border-color: var(--navy);
+      background: var(--navy-light);
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      accent-color: var(--navy);
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .check-item.checked {
+      border-color: var(--navy);
+      background: var(--navy-light);
+    }
+
+    .check-item span {
+      font-size: 0.93rem;
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+
+    /* ─── Row Layout ─────────────────────────────────────────────────── */
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .field-row { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Navigation Buttons ─────────────────────────────────────────── */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 32px;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      line-height: 1;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(27,58,107,0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-dark);
+      box-shadow: 0 4px 14px rgba(27,58,107,0.30);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--mid);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+      background: var(--navy-light);
+    }
+
+    .btn-submit {
+      background: var(--navy);
+      color: var(--white);
+      padding: 15px 32px;
+      font-size: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(27,58,107,0.28);
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-submit:hover {
+      background: var(--navy-dark);
+      box-shadow: 0 4px 18px rgba(27,58,107,0.32);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ─── Thank You Screen ───────────────────────────────────────────── */
+    #thank-you {
+      display: none;
+      text-align: center;
+      padding: 20px 0 8px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .checkmark-circle {
+      width: 72px;
+      height: 72px;
+      background: var(--navy-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .checkmark-circle svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--navy);
+      stroke-width: 3;
+      fill: none;
+    }
+
+    #thank-you h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-bottom: 14px;
+    }
+
+    #thank-you p {
+      color: var(--mid);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 20px;
+    }
+
+    #thank-you .email-line {
+      font-size: 0.88rem;
+      color: var(--mid);
+      margin-top: 12px;
+    }
+
+    #thank-you .email-line a {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    #thank-you .email-line a:hover { text-decoration: underline; }
+
+    /* ─── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 28px 16px;
+      font-size: 0.82rem;
+      color: var(--mid);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── Spinner ────────────────────────────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-right: 4px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Header ─────────────────────────────────────────────────────── -->
+  <header>
+    <div class="brand">Lehigh Valley AI Guys</div>
+    <div class="tagline">AI Voice Assistants for Local Business</div>
+  </header>
+
+  <!-- ─── Hero ───────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <h1>Never Miss Another <span>Customer Call</span></h1>
+    <p>We build AI voice assistants that answer your phone, capture leads, and book appointments — automatically. Fill out the form below and we'll have your bot ready in days, not weeks.</p>
+  </section>
+
+  <!-- ─── Main ────────────────────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- Progress Bar -->
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label" id="step-label">Step 1 of 6</span>
+        <span class="progress-count" id="step-name">Your Business</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:16.66%"></div>
+      </div>
+      <div class="progress-dots" id="progress-dots">
+        <div class="dot active" data-step="1"></div>
+        <div class="dot" data-step="2"></div>
+        <div class="dot" data-step="3"></div>
+        <div class="dot" data-step="4"></div>
+        <div class="dot" data-step="5"></div>
+        <div class="dot" data-step="6"></div>
+      </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="form-card">
+
+      <!-- ── STEP 1 ── Your Business ─────────────────────────────────── -->
+      <div class="step active" id="step-1">
+        <h2 class="step-headline">Tell us about your business</h2>
+        <p class="step-desc">Let's start with the basics so we can personalize your bot.</p>
+
+        <div class="field" id="field-business_name">
+          <label for="business_name">Business name</label>
+          <input type="text" id="business_name" placeholder="e.g. Valley Dental Group" autocomplete="organization" />
+          <span class="error-msg">Please enter your business name.</span>
+        </div>
+
+        <div class="field" id="field-industry">
+          <label for="industry">Type of business</label>
+          <input type="text" id="industry" placeholder="e.g. dental office, law firm, restaurant" />
+          <span class="error-msg">Please tell us what kind of business you run.</span>
+        </div>
+
+        <div class="field-row">
+          <div class="field" id="field-location">
+            <label for="location">City and state</label>
+            <input type="text" id="location" placeholder="e.g. Allentown, PA" />
+            <span class="error-msg">Please enter your city and state.</span>
+          </div>
+          <div class="field">
+            <label for="website">Website <span class="opt">(optional)</span></label>
+            <input type="url" id="website" placeholder="https://yoursite.com" />
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <span></span>
+          <button class="btn btn-primary" onclick="nextStep(1)">
+            Continue
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2 ── What Should Your Bot Do ──────────────────────── -->
+      <div class="step" id="step-2">
+        <h2 class="step-headline">What do you need your bot to handle?</h2>
+        <p class="step-desc">Select everything that applies — your bot can handle multiple jobs.</p>
+
+        <div class="field" id="field-bot_purposes">
+          <div class="checkbox-group" id="bot-purpose-group">
+            <label class="check-item" id="ci-answer_questions">
+              <input type="checkbox" name="bot_purpose" value="Answer common questions" onchange="toggleCheck(this)" />
+              <span>Answer common questions</span>
+            </label>
+            <label class="check-item" id="ci-book_appointments">
+              <input type="checkbox" name="bot_purpose" value="Book or schedule appointments" onchange="toggleCheck(this)" />
+              <span>Book or schedule appointments</span>
+            </label>
+            <label class="check-item" id="ci-capture_leads">
+              <input type="checkbox" name="bot_purpose" value="Capture leads and contact info" onchange="toggleCheck(this)" />
+              <span>Capture leads and contact info</span>
+            </label>
+            <label class="check-item" id="ci-customer_support">
+              <input type="checkbox" name="bot_purpose" value="Handle customer support calls" onchange="toggleCheck(this)" />
+              <span>Handle customer support calls</span>
+            </label>
+            <label class="check-item" id="ci-hours_location">
+              <input type="checkbox" name="bot_purpose" value="Give callers hours and location" onchange="toggleCheck(this)" />
+              <span>Give callers your hours and location</span>
+            </label>
+            <label class="check-item" id="ci-route_calls">
+              <input type="checkbox" name="bot_purpose" value="Route calls to the right person" onchange="toggleCheck(this)" />
+              <span>Route calls to the right person</span>
+            </label>
+            <label class="check-item" id="ci-take_orders">
+              <input type="checkbox" name="bot_purpose" value="Take orders or service requests" onchange="toggleCheck(this)" />
+              <span>Take orders or service requests</span>
+            </label>
+          </div>
+          <span class="error-msg" id="purposes-error">Please select at least one option.</span>
+        </div>
+
+        <div class="field">
+          <label for="bot_purposes_other">Anything else? <span class="opt">(optional)</span></label>
+          <input type="text" id="bot_purposes_other" placeholder="Describe any other tasks you need covered…" />
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-ghost" onclick="prevStep(2)">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep(2)">
+            Continue
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3 ── Your Services ────────────────────────────────── -->
+      <div class="step" id="step-3">
+        <h2 class="step-headline">What do you offer?</h2>
+        <p class="step-desc">Your bot needs to know what you sell or do so it can help callers.</p>
+
+        <div class="field" id="field-services">
+          <label for="services">List your main services or products</label>
+          <textarea id="services" class="tall" placeholder="e.g. Teeth cleaning, fillings, cosmetic dentistry, emergency dental care"></textarea>
+          <span class="error-msg">Please tell us what you offer.</span>
+        </div>
+
+        <div class="field">
+          <label for="pricing">Any pricing info you want the bot to share? <span class="opt">(optional)</span></label>
+          <textarea id="pricing" placeholder="e.g. Cleanings start at $99, free consultations available"></textarea>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-ghost" onclick="prevStep(3)">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep(3)">
+            Continue
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 4 ── Hours & Contact ──────────────────────────────── -->
+      <div class="step" id="step-4">
+        <h2 class="step-headline">When are you open?</h2>
+        <p class="step-desc">Your bot will use this to tell callers when they can reach you.</p>
+
+        <div class="field" id="field-hours">
+          <label for="hours">Business hours</label>
+          <textarea id="hours" placeholder="e.g. Mon–Fri 8am–5pm, Saturday 9am–1pm, Sunday closed"></textarea>
+          <span class="error-msg">Please share your business hours.</span>
+        </div>
+
+        <div class="field-row">
+          <div class="field" id="field-phone">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" placeholder="(610) 555-0100" autocomplete="tel" />
+            <span class="error-msg">Please enter your phone number.</span>
+          </div>
+          <div class="field" id="field-email">
+            <label for="email">Best email for leads &amp; messages</label>
+            <input type="email" id="email" placeholder="you@yourbusiness.com" autocomplete="email" />
+            <span class="error-msg">Please enter a valid email address.</span>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-ghost" onclick="prevStep(4)">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep(4)">
+            Continue
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 5 ── Common Questions ─────────────────────────────── -->
+      <div class="step" id="step-5">
+        <h2 class="step-headline">What do customers always ask you?</h2>
+        <p class="step-desc">Think of the questions you answer every single day. Your bot will know all of these.</p>
+
+        <div class="field" id="field-faqs">
+          <label for="faqs">Write your top questions and answers</label>
+          <textarea id="faqs" class="tall" placeholder="Q: Do you accept walk-ins?&#10;A: Yes, walk-ins welcome during business hours.&#10;&#10;Q: Do you offer free estimates?&#10;A: Absolutely, all estimates are free."></textarea>
+          <span class="error-msg">Please add at least one question and answer.</span>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-ghost" onclick="prevStep(5)">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep(5)">
+            Continue
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 6 ── Bot Personality ──────────────────────────────── -->
+      <div class="step" id="step-6">
+        <h2 class="step-headline">How should your bot sound?</h2>
+        <p class="step-desc">Give your bot a name and a personality that matches your brand.</p>
+
+        <div class="field" id="field-bot_name">
+          <label for="bot_name">Bot name</label>
+          <input type="text" id="bot_name" placeholder="e.g. Jess, Alex, Max" />
+          <span class="error-msg">Please give your bot a name.</span>
+        </div>
+
+        <div class="field" id="field-tone">
+          <label>Tone</label>
+          <div class="checkbox-group" id="tone-group">
+            <label class="check-item">
+              <input type="checkbox" name="tone" value="Friendly and warm" onchange="toggleCheck(this)" />
+              <span>Friendly and warm</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="tone" value="Professional and polished" onchange="toggleCheck(this)" />
+              <span>Professional and polished</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="tone" value="Casual and conversational" onchange="toggleCheck(this)" />
+              <span>Casual and conversational</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="tone" value="Energetic and upbeat" onchange="toggleCheck(this)" />
+              <span>Energetic and upbeat</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="tone" value="Calm and reassuring" onchange="toggleCheck(this)" />
+              <span>Calm and reassuring</span>
+            </label>
+          </div>
+          <span class="error-msg" id="tone-error">Please select at least one tone.</span>
+        </div>
+
+        <div class="field">
+          <label for="style_notes">Any specific phrases or words you want the bot to use or avoid? <span class="opt">(optional)</span></label>
+          <textarea id="style_notes" placeholder="e.g. Always say 'Great question!' — never say 'No problem'"></textarea>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-ghost" onclick="prevStep(6)">← Back</button>
+          <button class="btn btn-submit" id="submit-btn" onclick="submitForm()">
+            Send My Info to the Team
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Thank You Screen ────────────────────────────────────────── -->
+      <div id="thank-you">
+        <div class="checkmark-circle">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2>You're all set!</h2>
+        <p>Thanks for submitting your information. The Lehigh Valley AI Guys team will review everything and reach out within one business day to discuss next steps.</p>
+        <p class="email-line">Questions? Email us at <a href="mailto:hello@lehighvalleyaiguys.com">hello@lehighvalleyaiguys.com</a></p>
+      </div>
+
+    </div><!-- /form-card -->
+  </main>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────────── -->
+  <footer>
+    Lehigh Valley AI Guys &middot; Serving the Lehigh Valley, PA &middot; lehighvalleyaiguys.com
+  </footer>
+
+  <!-- ─── JavaScript ──────────────────────────────────────────────────── -->
+  <script>
+    /* ── State ─────────────────────────────────────────────────────────── */
+    const TOTAL_STEPS = 6;
+    let currentStep  = 1;
+
+    const STEP_NAMES = [
+      'Your Business',
+      'Bot Tasks',
+      'Your Services',
+      'Hours & Contact',
+      'Common Questions',
+      'Personality'
+    ];
+
+    /* ── Webhook URL ───────────────────────────────────────────────────── */
+    // Replace this with your actual n8n webhook URL when ready.
+    const WEBHOOK_URL = 'https://your-n8n-webhook-url-here';
+
+    /* ── Progress UI ───────────────────────────────────────────────────── */
+    function updateProgress(step) {
+      const pct = (step / TOTAL_STEPS) * 100;
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('step-label').textContent = `Step ${step} of ${TOTAL_STEPS}`;
+      document.getElementById('step-name').textContent  = STEP_NAMES[step - 1];
+
+      document.querySelectorAll('.dot').forEach(dot => {
+        const n = parseInt(dot.dataset.step);
+        dot.className = 'dot';
+        if (n < step)       dot.classList.add('done');
+        else if (n === step) dot.classList.add('active');
+      });
+    }
+
+    /* ── Checkbox visual toggle ─────────────────────────────────────────── */
+    function toggleCheck(cb) {
+      cb.closest('.check-item').classList.toggle('checked', cb.checked);
+    }
+
+    /* ── Validation ────────────────────────────────────────────────────── */
+    function clearErrors() {
+      document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+    }
+
+    function setError(fieldId) {
+      const el = document.getElementById(fieldId);
+      if (el) el.classList.add('field-error');
+    }
+
+    function validateStep(step) {
+      clearErrors();
+      let valid = true;
+
+      if (step === 1) {
+        const bn = document.getElementById('business_name').value.trim();
+        const ind = document.getElementById('industry').value.trim();
+        const loc = document.getElementById('location').value.trim();
+        if (!bn)  { setError('field-business_name'); valid = false; }
+        if (!ind) { setError('field-industry');      valid = false; }
+        if (!loc) { setError('field-location');      valid = false; }
+      }
+
+      if (step === 2) {
+        const checked = document.querySelectorAll('input[name="bot_purpose"]:checked');
+        if (checked.length === 0) {
+          setError('field-bot_purposes');
+          document.getElementById('purposes-error').style.display = 'block';
+          valid = false;
+        } else {
+          document.getElementById('purposes-error').style.display = '';
+        }
+      }
+
+      if (step === 3) {
+        const svc = document.getElementById('services').value.trim();
+        if (!svc) { setError('field-services'); valid = false; }
+      }
+
+      if (step === 4) {
+        const hrs   = document.getElementById('hours').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        if (!hrs)   { setError('field-hours'); valid = false; }
+        if (!phone) { setError('field-phone'); valid = false; }
+        if (!email || !email.includes('@')) { setError('field-email'); valid = false; }
+      }
+
+      if (step === 5) {
+        const faqs = document.getElementById('faqs').value.trim();
+        if (!faqs) { setError('field-faqs'); valid = false; }
+      }
+
+      if (step === 6) {
+        const name = document.getElementById('bot_name').value.trim();
+        const tones = document.querySelectorAll('input[name="tone"]:checked');
+        if (!name)          { setError('field-bot_name'); valid = false; }
+        if (tones.length === 0) {
+          setError('field-tone');
+          document.getElementById('tone-error').style.display = 'block';
+          valid = false;
+        } else {
+          document.getElementById('tone-error').style.display = '';
+        }
+      }
+
+      // Scroll to first error smoothly
+      if (!valid) {
+        const firstErr = document.querySelector('.field-error');
+        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      return valid;
+    }
+
+    /* ── Step Navigation ───────────────────────────────────────────────── */
+    function showStep(n) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById(`step-${n}`).classList.add('active');
+      updateProgress(n);
+      currentStep = n;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextStep(from) {
+      if (!validateStep(from)) return;
+      showStep(from + 1);
+    }
+
+    function prevStep(from) {
+      clearErrors();
+      showStep(from - 1);
+    }
+
+    /* ── Build JSON Payload ────────────────────────────────────────────── */
+    function buildPayload() {
+      // bot_purposes: all checked options + optional free-text
+      const purposeChecked = [...document.querySelectorAll('input[name="bot_purpose"]:checked')]
+        .map(cb => cb.value);
+      const purposeOther   = document.getElementById('bot_purposes_other').value.trim();
+      if (purposeOther) purposeChecked.push(purposeOther);
+
+      // tone: all checked
+      const toneChecked = [...document.querySelectorAll('input[name="tone"]:checked')]
+        .map(cb => cb.value);
+
+      return {
+        timestamp:     new Date().toISOString(),
+        business_name: document.getElementById('business_name').value.trim(),
+        industry:      document.getElementById('industry').value.trim(),
+        location:      document.getElementById('location').value.trim(),
+        website:       document.getElementById('website').value.trim(),
+        bot_purposes:  purposeChecked.join(', '),
+        services:      document.getElementById('services').value.trim(),
+        pricing:       document.getElementById('pricing').value.trim(),
+        hours:         document.getElementById('hours').value.trim(),
+        phone:         document.getElementById('phone').value.trim(),
+        email:         document.getElementById('email').value.trim(),
+        faqs:          document.getElementById('faqs').value.trim(),
+        bot_name:      document.getElementById('bot_name').value.trim(),
+        tone:          toneChecked.join(', '),
+        style_notes:   document.getElementById('style_notes').value.trim()
+      };
+    }
+
+    /* ── Submit ────────────────────────────────────────────────────────── */
+    async function submitForm() {
+      if (!validateStep(6)) return;
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Sending…';
+
+      const payload = buildPayload();
+
+      try {
+        await fetch(WEBHOOK_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload)
+        });
+      } catch (err) {
+        // Even if the webhook isn't configured yet, show the thank-you screen
+        // so the UX is correct. Log the error for debugging.
+        console.warn('Webhook error (non-blocking):', err);
+      }
+
+      // Hide form UI, show thank-you
+      document.getElementById('progress-wrap').style.display = 'none';
+      document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+      document.getElementById('thank-you').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
