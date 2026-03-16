@@ -3,100 +3,615 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lehigh Valley AI Guys – Client Intake Form</title>
+  <title>Lehigh Valley AI Guys – Your Phone Gets Answered. Every Time.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── Reset & Base ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:       #1B3A6B;   /* primary accent */
-      --navy-dark:  #142d55;   /* hover state    */
-      --navy-light: #e8eef7;   /* tint/bg        */
-      --charcoal:   #1e2230;   /* body text       */
-      --mid:        #5a6275;   /* secondary text  */
-      --border:     #d8dce6;
-      --white:      #ffffff;
-      --success:    #2e7d32;
-      --error:      #c0392b;
-      --radius:     12px;
-      --shadow:     0 4px 24px rgba(27,58,107,0.10);
+      --dark:        #1E2535;
+      --dark-2:      #252D3E;
+      --dark-3:      #2C3650;
+      --blue:        #2563EB;
+      --blue-light:  #60A5FA;
+      --cyan:        #22D3EE;
+      --green:       #10B981;
+      --green-dark:  #059669;
+      --orange:      #F97316;
+      --orange-dark: #EA6E0A;
+      --white:       #FFFFFF;
+      --off-white:   #F0F4FF;
+      --charcoal:    #1A2035;
+      --mid:         #5A6275;
+      --border:      #D8DCE6;
+      --error:       #EF4444;
+      --radius:      14px;
+      --shadow:      0 8px 48px rgba(37,99,235,0.14);
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', sans-serif;
-      background: #f4f6fb;
+      background: var(--off-white);
       color: var(--charcoal);
       font-size: 16px;
       line-height: 1.6;
       min-height: 100vh;
     }
 
-    /* ─── Header ────────────────────────────────────────────────────── */
+    /* ── HEADER ──────────────────────────────────────────────────── */
     header {
-      background: var(--navy);
-      color: var(--white);
-      padding: 22px 24px;
-      text-align: center;
+      background: var(--dark);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(34,211,238,0.12);
     }
 
-    header .brand {
-      font-size: 1.5rem;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      font-size: 1.08rem;
       font-weight: 800;
+      color: var(--white);
       letter-spacing: -0.3px;
     }
 
-    header .tagline {
-      font-size: 0.9rem;
-      font-weight: 400;
-      opacity: 0.82;
-      margin-top: 4px;
-      letter-spacing: 0.4px;
+    .brand-text span {
+      background: linear-gradient(90deg, var(--blue-light), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* ─── Hero ──────────────────────────────────────────────────────── */
+    /* Live badge */
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: var(--green);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 6px 13px;
+      border-radius: 99px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: livePulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.6); }
+      50%       { opacity: 0.7; box-shadow: 0 0 0 5px rgba(16,185,129,0); }
+    }
+
+    /* ── SHARED TEXTURE ─────────────────────────────────────────── */
+    /* Subtle diagonal line grain for dark sections */
+    .dark-texture {
+      background-image:
+        repeating-linear-gradient(
+          -45deg,
+          rgba(255,255,255,0.018) 0px,
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px,
+          transparent 8px
+        );
+    }
+
+    /* ── HERO ────────────────────────────────────────────────────── */
     .hero {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      padding: 52px 24px 44px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+      padding: 80px 24px 90px;
       text-align: center;
     }
 
+    /* Animated grid background */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(34,211,238,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34,211,238,0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    /* Glow blobs */
+    .glow-1 {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.22) 0%, transparent 65%);
+      pointer-events: none;
+      animation: glowDrift 8s ease-in-out infinite alternate;
+    }
+
+    .glow-2 {
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(34,211,238,0.12) 0%, transparent 65%);
+      pointer-events: none;
+      animation: glowDrift 10s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes glowDrift {
+      from { transform: translateX(-50%) scale(1); }
+      to   { transform: translateX(-46%) scale(1.08); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Ringing phone animation strip */
+    .phone-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.25);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 99px;
+      margin-bottom: 32px;
+      letter-spacing: 0.3px;
+    }
+
+    .phone-icon {
+      font-size: 15px;
+      animation: ringWiggle 2.5s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    @keyframes ringWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      10%       { transform: rotate(-18deg); }
+      20%       { transform: rotate(16deg); }
+      30%       { transform: rotate(-10deg); }
+      40%       { transform: rotate(8deg); }
+      50%       { transform: rotate(0deg); }
+    }
+
+    .phone-strip .green-text {
+      color: var(--green);
+      font-weight: 700;
+    }
+
     .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--blue-light) 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-hook {
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      color: rgba(255,255,255,0.6);
+      max-width: 560px;
+      margin: 0 auto 44px;
+      line-height: 1.75;
+    }
+
+    .hero-hook strong {
+      color: rgba(255,255,255,0.95);
+      font-weight: 700;
+    }
+
+    /* Stat cards in hero */
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 18px 24px;
+      text-align: center;
+      min-width: 150px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .stat-card:hover {
+      background: rgba(37,99,235,0.1);
+      border-color: rgba(37,99,235,0.4);
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--cyan);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Main CTA */
+    .hero-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
       font-weight: 800;
-      color: var(--charcoal);
-      letter-spacing: -0.5px;
-      line-height: 1.2;
+      padding: 20px 40px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 32px rgba(249,115,22,0.5);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      letter-spacing: -0.2px;
     }
 
-    .hero h1 span {
-      color: var(--navy);
+    .cta-btn:hover {
+      background: var(--orange-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(249,115,22,0.6);
     }
 
-    .hero p {
-      max-width: 620px;
-      margin: 18px auto 0;
-      color: var(--mid);
-      font-size: 1.05rem;
+    .cta-btn:active { transform: scale(0.98) translateY(0); }
+
+    .cta-sub {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── MISSED CALL BANNER ───────────────────────────────────────── */
+    .missed-banner {
+      background: linear-gradient(90deg, #20293B 0%, #252E42 50%, #20293B 100%);
+      border-top: 1px solid rgba(239,68,68,0.2);
+      border-bottom: 1px solid rgba(239,68,68,0.2);
+      padding: 36px 24px;
+      text-align: center;
+    }
+
+    .missed-banner p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255,255,255,0.75);
+      max-width: 680px;
+      margin: 0 auto;
       line-height: 1.7;
     }
 
-    /* ─── Main Wrapper ──────────────────────────────────────────────── */
-    .main {
-      max-width: 700px;
-      margin: 48px auto 80px;
-      padding: 0 16px;
+    .missed-banner p strong {
+      color: #FC6D6D;
+      font-weight: 800;
     }
 
-    /* ─── Progress Bar ──────────────────────────────────────────────── */
+    .missed-banner p .good {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .staff-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(37,99,235,0.35);
+      border-radius: 12px;
+      padding: 20px 24px;
+      max-width: 680px;
+      margin: 24px auto 0;
+      text-align: left;
+    }
+
+    .staff-callout-icon {
+      font-size: 22px;
+      line-height: 1;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .staff-callout div {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+    }
+
+    .staff-callout strong {
+      display: block;
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* ── HOW IT WORKS ────────────────────────────────────────────── */
+    .hiw {
+      background: var(--dark-2);
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .section-eyebrow {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .hiw h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.6px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .hiw > p {
+      color: rgba(255,255,255,0.45);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 52px;
+    }
+
+    .hiw-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .hiw-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 28px 22px;
+      text-align: left;
+      transition: border-color 0.2s, background 0.25s, transform 0.2s;
+    }
+
+    .hiw-card:hover {
+      background: rgba(37,99,235,0.09);
+      border-color: rgba(34,211,238,0.3);
+      transform: translateY(-3px);
+    }
+
+    .hiw-num {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+
+    .hiw-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 7px;
+      letter-spacing: -0.2px;
+    }
+
+    .hiw-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+    }
+
+    /* ── PROMISE SECTION ─────────────────────────────────────────── */
+    .promise {
+      background: var(--dark);
+      padding: 64px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(34,211,238,0.1);
+    }
+
+    .promise-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .promise h2 {
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .promise h2 span {
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .promise > .promise-inner > p {
+      color: rgba(255,255,255,0.5);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 580px;
+      margin: 0 auto 48px;
+    }
+
+    .promise-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      text-align: left;
+      margin-bottom: 52px;
+    }
+
+    .promise-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(16,185,129,0.06);
+      border: 1px solid rgba(16,185,129,0.18);
+      border-radius: 12px;
+      padding: 20px 20px;
+    }
+
+    .promise-check {
+      width: 28px;
+      height: 28px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .promise-check svg {
+      width: 14px;
+      height: 14px;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .promise-item-text strong {
+      display: block;
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+
+    .promise-item-text span {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    /* ── FORM SECTION ────────────────────────────────────────────── */
+    .form-section {
+      padding: 64px 16px 88px;
+      background: var(--off-white);
+    }
+
+    .form-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+
+    .form-header h2 {
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 900;
+      color: var(--charcoal);
+      letter-spacing: -0.6px;
+      line-height: 1.18;
+      margin-bottom: 12px;
+    }
+
+    .form-header h2 span { color: var(--blue); }
+
+    .form-header p {
+      color: var(--mid);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .free-tag {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--green), #06b67a);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 99px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    /* ── PROGRESS BAR ────────────────────────────────────────────── */
     .progress-wrap {
-      margin-bottom: 32px;
+      max-width: 700px;
+      margin: 0 auto 24px;
     }
 
     .progress-meta {
@@ -107,16 +622,17 @@
     }
 
     .progress-label {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--navy);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--blue);
       text-transform: uppercase;
       letter-spacing: 0.7px;
     }
 
     .progress-count {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--mid);
+      font-weight: 600;
     }
 
     .progress-track {
@@ -128,12 +644,11 @@
 
     .progress-fill {
       height: 100%;
-      background: var(--navy);
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
       border-radius: 99px;
-      transition: width 0.4s ease;
+      transition: width 0.45s ease;
     }
 
-    /* Step dots */
     .progress-dots {
       display: flex;
       gap: 6px;
@@ -142,46 +657,41 @@
     }
 
     .dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--border);
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
+    .dot.done   { background: var(--blue); }
+    .dot.active { background: var(--blue); transform: scale(1.4); }
 
-    .dot.done  { background: var(--navy); }
-    .dot.active { background: var(--navy); transform: scale(1.3); }
-
-    /* ─── Form Card ─────────────────────────────────────────────────── */
+    /* ── FORM CARD ───────────────────────────────────────────────── */
     .form-card {
       background: var(--white);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 40px 44px;
+      padding: 44px 48px;
+      max-width: 700px;
+      margin: 0 auto;
+      border: 1px solid rgba(37,99,235,0.08);
     }
 
-    @media (max-width: 540px) {
-      .form-card { padding: 28px 20px; }
-    }
+    @media (max-width: 540px) { .form-card { padding: 28px 20px; } }
 
-    /* ─── Step ──────────────────────────────────────────────────────── */
-    .step {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
-
+    .step { display: none; animation: fadeUp 0.35s ease; }
     .step.active { display: block; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     .step-headline {
-      font-size: 1.35rem;
-      font-weight: 700;
+      font-size: 1.4rem;
+      font-weight: 800;
       color: var(--charcoal);
       margin-bottom: 6px;
+      letter-spacing: -0.3px;
       line-height: 1.3;
     }
 
@@ -189,26 +699,21 @@
       font-size: 0.95rem;
       color: var(--mid);
       margin-bottom: 28px;
+      line-height: 1.6;
     }
 
-    /* ─── Field Groups ───────────────────────────────────────────────── */
-    .field {
-      margin-bottom: 20px;
-    }
+    /* ── FIELDS ──────────────────────────────────────────────────── */
+    .field { margin-bottom: 20px; }
 
     label {
       display: block;
       font-size: 0.88rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--charcoal);
       margin-bottom: 6px;
     }
 
-    label .opt {
-      font-weight: 400;
-      color: var(--mid);
-      font-size: 0.82rem;
-    }
+    label .opt { font-weight: 400; color: var(--mid); font-size: 0.82rem; }
 
     input[type="text"],
     input[type="email"],
@@ -216,44 +721,39 @@
     input[type="url"],
     textarea {
       width: 100%;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
       font-family: 'Inter', sans-serif;
       font-size: 0.95rem;
       color: var(--charcoal);
-      background: var(--white);
+      background: #F8FAFF;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
       resize: vertical;
     }
 
-    input:focus,
-    textarea:focus {
-      border-color: var(--navy);
-      box-shadow: 0 0 0 3px rgba(27,58,107,0.10);
+    input:focus, textarea:focus {
+      border-color: var(--blue);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
     }
 
     textarea { min-height: 100px; line-height: 1.6; }
     textarea.tall { min-height: 140px; }
 
-    /* ─── Error State ────────────────────────────────────────────────── */
     .field-error input,
-    .field-error textarea {
-      border-color: var(--error);
-    }
+    .field-error textarea { border-color: var(--error); }
 
     .error-msg {
       display: none;
       font-size: 0.8rem;
       color: var(--error);
       margin-top: 5px;
-      font-weight: 500;
+      font-weight: 600;
     }
-
     .field-error .error-msg { display: block; }
 
-    /* ─── Checkboxes ─────────────────────────────────────────────────── */
     .checkbox-group {
       display: flex;
       flex-direction: column;
@@ -266,50 +766,28 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
-      padding: 11px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
       transition: border-color 0.2s, background 0.2s;
       user-select: none;
+      background: #F8FAFF;
     }
 
-    .check-item:hover {
-      border-color: var(--navy);
-      background: var(--navy-light);
-    }
+    .check-item:hover { border-color: var(--blue); background: rgba(37,99,235,0.04); }
 
     .check-item input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      min-width: 20px;
-      accent-color: var(--navy);
-      cursor: pointer;
-      border-radius: 4px;
+      width: 20px; height: 20px; min-width: 20px;
+      accent-color: var(--blue); cursor: pointer;
     }
 
-    .check-item.checked {
-      border-color: var(--navy);
-      background: var(--navy-light);
-    }
+    .check-item.checked { border-color: var(--blue); background: rgba(37,99,235,0.06); }
+    .check-item span { font-size: 0.93rem; color: var(--charcoal); line-height: 1.4; font-weight: 500; }
 
-    .check-item span {
-      font-size: 0.93rem;
-      color: var(--charcoal);
-      line-height: 1.4;
-    }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
 
-    /* ─── Row Layout ─────────────────────────────────────────────────── */
-    .field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    @media (max-width: 480px) {
-      .field-row { grid-template-columns: 1fr; }
-    }
-
-    /* ─── Navigation Buttons ─────────────────────────────────────────── */
+    /* ── NAV BUTTONS ─────────────────────────────────────────────── */
     .nav-buttons {
       display: flex;
       justify-content: space-between;
@@ -323,134 +801,124 @@
       align-items: center;
       gap: 7px;
       padding: 13px 26px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-family: 'Inter', sans-serif;
       font-size: 0.95rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       border: none;
-      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
       line-height: 1;
     }
 
     .btn:active { transform: scale(0.97); }
 
     .btn-primary {
-      background: var(--navy);
+      background: var(--blue);
       color: var(--white);
-      box-shadow: 0 2px 8px rgba(27,58,107,0.25);
+      box-shadow: 0 2px 12px rgba(37,99,235,0.3);
     }
 
     .btn-primary:hover {
-      background: var(--navy-dark);
-      box-shadow: 0 4px 14px rgba(27,58,107,0.30);
+      background: #1D4ED8;
+      box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+      transform: translateY(-1px);
     }
 
     .btn-ghost {
       background: transparent;
       color: var(--mid);
-      border: 1.5px solid var(--border);
+      border: 2px solid var(--border);
     }
 
     .btn-ghost:hover {
-      border-color: var(--navy);
-      color: var(--navy);
-      background: var(--navy-light);
+      border-color: var(--blue);
+      color: var(--blue);
+      background: rgba(37,99,235,0.04);
     }
 
     .btn-submit {
-      background: var(--navy);
+      background: var(--orange);
       color: var(--white);
-      padding: 15px 32px;
+      padding: 17px 32px;
       font-size: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(27,58,107,0.28);
+      font-weight: 800;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(249,115,22,0.38);
       width: 100%;
       justify-content: center;
     }
 
     .btn-submit:hover {
-      background: var(--navy-dark);
-      box-shadow: 0 4px 18px rgba(27,58,107,0.32);
+      background: var(--orange-dark);
+      box-shadow: 0 6px 28px rgba(249,115,22,0.5);
+      transform: translateY(-1px);
     }
 
-    .btn-submit:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-      transform: none;
-    }
+    .btn-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
 
-    /* ─── Thank You Screen ───────────────────────────────────────────── */
+    /* ── THANK YOU ───────────────────────────────────────────────── */
     #thank-you {
       display: none;
       text-align: center;
       padding: 20px 0 8px;
-      animation: fadeIn 0.4s ease;
+      animation: fadeUp 0.45s ease;
     }
 
-    .checkmark-circle {
-      width: 72px;
-      height: 72px;
-      background: var(--navy-light);
+    .success-circle {
+      width: 84px;
+      height: 84px;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 24px;
+      margin: 0 auto 28px;
+      box-shadow: 0 8px 36px rgba(16,185,129,0.4);
     }
 
-    .checkmark-circle svg {
-      width: 36px;
-      height: 36px;
-      stroke: var(--navy);
-      stroke-width: 3;
-      fill: none;
+    .success-circle svg {
+      width: 42px; height: 42px;
+      stroke: white; stroke-width: 3; fill: none;
     }
 
     #thank-you h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
+      font-size: 2rem;
+      font-weight: 900;
       color: var(--charcoal);
       margin-bottom: 14px;
+      letter-spacing: -0.5px;
     }
 
     #thank-you p {
       color: var(--mid);
       font-size: 1rem;
-      line-height: 1.7;
-      max-width: 480px;
-      margin: 0 auto 20px;
+      line-height: 1.75;
+      max-width: 460px;
+      margin: 0 auto 16px;
     }
 
-    #thank-you .email-line {
-      font-size: 0.88rem;
-      color: var(--mid);
-      margin-top: 12px;
-    }
-
-    #thank-you .email-line a {
-      color: var(--navy);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
+    #thank-you .email-line { font-size: 0.88rem; color: var(--mid); margin-top: 12px; }
+    #thank-you .email-line a { color: var(--blue); text-decoration: none; font-weight: 700; }
     #thank-you .email-line a:hover { text-decoration: underline; }
 
-    /* ─── Footer ─────────────────────────────────────────────────────── */
+    /* ── FOOTER ──────────────────────────────────────────────────── */
     footer {
+      background: var(--dark);
       text-align: center;
-      padding: 28px 16px;
+      padding: 36px 16px;
       font-size: 0.82rem;
-      color: var(--mid);
-      border-top: 1px solid var(--border);
+      color: rgba(255,255,255,0.3);
+      border-top: 1px solid rgba(34,211,238,0.1);
     }
 
-    /* ─── Spinner ────────────────────────────────────────────────────── */
+    footer a { color: var(--cyan); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
     .spinner {
       display: inline-block;
-      width: 16px;
-      height: 16px;
-      border: 2px solid rgba(255,255,255,0.4);
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.35);
       border-top-color: #fff;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
@@ -458,27 +926,217 @@
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 640px) {
+      .hiw-grid, .promise-list { grid-template-columns: 1fr; }
+      .stat-row { gap: 10px; }
+      .stat-card { min-width: 130px; }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- ─── Header ─────────────────────────────────────────────────────── -->
+  <!-- ── HEADER ─────────────────────────────────────────────────────── -->
   <header>
-    <div class="brand">Lehigh Valley AI Guys</div>
-    <div class="tagline">AI Voice Assistants for Local Business</div>
+    <div class="brand">
+      <div class="brand-icon">🤖</div>
+      <div class="brand-text">Lehigh Valley <span>AI Guys</span></div>
+    </div>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      Always Live
+    </div>
   </header>
 
-  <!-- ─── Hero ───────────────────────────────────────────────────────── -->
-  <section class="hero">
-    <h1>Never Miss Another <span>Customer Call</span></h1>
-    <p>We build AI voice assistants that answer your phone, capture leads, and book appointments — automatically. Fill out the form below and we'll have your bot ready in days, not weeks.</p>
+  <!-- ── HERO ───────────────────────────────────────────────────────── -->
+  <section class="hero dark-texture">
+    <div class="hero-grid"></div>
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <div class="hero-inner">
+
+      <div class="phone-strip">
+        <span class="phone-icon">📞</span>
+        Your phone is ringing right now —
+        <span class="green-text">will you answer it?</span>
+      </div>
+
+      <h1>
+        Every Call Answered.<br>
+        <span class="line2">Every Lead Captured. 24/7.</span>
+      </h1>
+
+      <p class="hero-hook">
+        Your AI receptionist <strong>never sleeps, never calls in sick, and never sends a customer to voicemail.</strong>
+        Free your staff for the work that actually moves your business forward — while the AI handles every call.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num">62%</div>
+          <div class="stat-label">of callers won't leave a voicemail — they call your competitor</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">your AI picks up — nights, weekends, holidays</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$0</div>
+          <div class="stat-label">to get started — test drive it free, no obligation</div>
+        </div>
+      </div>
+
+      <div class="hero-cta-wrap">
+        <a href="#lead-form" class="cta-btn">
+          Get My Free AI Receptionist
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <div class="cta-sub">No credit card · No tech skills · No commitment · Ready in days</div>
+      </div>
+
+    </div>
   </section>
 
-  <!-- ─── Main ────────────────────────────────────────────────────────── -->
-  <main class="main">
+  <!-- ── MISSED CALL BANNER ──────────────────────────────────────────── -->
+  <div class="missed-banner dark-texture">
+    <p>
+      <strong>Every missed call is a missed customer.</strong>
+      When your phone rings after hours, on a weekend, or while you're slammed with work —
+      your AI receptionist picks up, answers questions, captures their info, and books the appointment.
+      <span class="good">You never miss a thing.</span>
+    </p>
+    <div class="staff-callout">
+      <div class="staff-callout-icon">💡</div>
+      <div>
+        <strong>Let your team focus on what they do best.</strong>
+        Stop pulling staff away from important work just to answer the same questions over the phone.
+        Your AI handles the calls — your team handles the business.
+      </div>
+    </div>
+  </div>
 
-    <!-- Progress Bar -->
+  <!-- ── HOW IT WORKS ───────────────────────────────────────────────── -->
+  <section class="hiw dark-texture">
+    <p class="section-eyebrow">How It Works</p>
+    <h2>Simple Setup. Real Results. Starting Free.</h2>
+    <p>No tech background needed. We handle everything — you just fill out a form.</p>
+
+    <div class="hiw-grid">
+      <div class="hiw-card">
+        <div class="hiw-num">1</div>
+        <h3>Fill Out This Form</h3>
+        <p>Tell us about your business and how you want your AI to sound. Takes about 5 minutes.</p>
+      </div>
+      <div class="hiw-card">
+        <div class="hiw-num">2</div>
+        <h3>We Build It For You</h3>
+        <p>Our team builds your custom AI receptionist and has it ready within a few business days — at no cost.</p>
+      </div>
+      <div class="hiw-card">
+        <div class="hiw-num">3</div>
+        <h3>Test Drive It Yourself</h3>
+        <p>Call it. Ask it questions. See how it handles real customers. You'll be amazed. No commitment required.</p>
+      </div>
+      <div class="hiw-card">
+        <div class="hiw-num">4</div>
+        <h3>Never Miss Another Call</h3>
+        <p>Go live and let your AI handle every call, 24/7. Leads, bookings, questions — all captured automatically.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROMISE ────────────────────────────────────────────────────── -->
+  <section class="promise dark-texture">
+    <div class="promise-inner">
+      <p class="section-eyebrow">What You Get</p>
+      <h2>Your Business,<br><span>Always Open. Always Answering.</span></h2>
+      <p>Your AI receptionist works every hour of every day so you don't have to. Here's what that looks like for your business:</p>
+
+      <div class="promise-list">
+        <div class="promise-item">
+          <div class="promise-check">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="promise-item-text">
+            <strong>Answers every call instantly</strong>
+            <span>No rings to voicemail. No hold music. Every caller gets a real response.</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="promise-item-text">
+            <strong>Captures leads automatically</strong>
+            <span>Name, number, and reason for calling — delivered straight to your inbox.</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="promise-item-text">
+            <strong>Books appointments 24/7</strong>
+            <span>Callers can schedule right over the phone — even at 2am on a Sunday.</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="promise-item-text">
+            <strong>Answers your FAQs perfectly</strong>
+            <span>Hours, pricing, services — your AI knows your business inside and out.</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="promise-item-text">
+            <strong>Sounds like your business</strong>
+            <span>Custom name, your tone, your personality. Customers won't know it's AI.</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="promise-item-text">
+            <strong>Affordable for any small business</strong>
+            <span>Way less than a part-time receptionist. Start completely free to see it work.</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="promise-item-text">
+            <strong>Frees your staff for what matters</strong>
+            <span>Stop interrupting your team to answer the phone. Let AI handle calls so your people focus on higher-value work.</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#lead-form" class="cta-btn">
+        Start for Free — No Obligation
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FORM SECTION ───────────────────────────────────────────────── -->
+  <section class="form-section" id="lead-form">
+
+    <div class="form-header">
+      <div class="free-tag">100% Free to Start</div>
+      <h2>Build Your <span>AI Receptionist</span> in 5 Minutes</h2>
+      <p>Fill out the form below. We'll build it, you'll test it. No cost, no commitment, no tech knowledge required.</p>
+    </div>
+
+    <!-- Progress -->
     <div class="progress-wrap" id="progress-wrap">
       <div class="progress-meta">
         <span class="progress-label" id="step-label">Step 1 of 6</span>
@@ -500,10 +1158,10 @@
     <!-- Form Card -->
     <div class="form-card">
 
-      <!-- ── STEP 1 ── Your Business ─────────────────────────────────── -->
+      <!-- STEP 1 -->
       <div class="step active" id="step-1">
         <h2 class="step-headline">Tell us about your business</h2>
-        <p class="step-desc">Let's start with the basics so we can personalize your bot.</p>
+        <p class="step-desc">Let's start with the basics so we can personalize your AI receptionist perfectly.</p>
 
         <div class="field" id="field-business_name">
           <label for="business_name">Business name</label>
@@ -513,7 +1171,7 @@
 
         <div class="field" id="field-industry">
           <label for="industry">Type of business</label>
-          <input type="text" id="industry" placeholder="e.g. dental office, law firm, restaurant" />
+          <input type="text" id="industry" placeholder="e.g. dental office, law firm, HVAC company" />
           <span class="error-msg">Please tell us what kind of business you run.</span>
         </div>
 
@@ -538,41 +1196,20 @@
         </div>
       </div>
 
-      <!-- ── STEP 2 ── What Should Your Bot Do ──────────────────────── -->
+      <!-- STEP 2 -->
       <div class="step" id="step-2">
-        <h2 class="step-headline">What do you need your bot to handle?</h2>
-        <p class="step-desc">Select everything that applies — your bot can handle multiple jobs.</p>
+        <h2 class="step-headline">What do you need your AI to handle?</h2>
+        <p class="step-desc">Select everything that applies — your AI receptionist can juggle multiple jobs at once.</p>
 
         <div class="field" id="field-bot_purposes">
           <div class="checkbox-group" id="bot-purpose-group">
-            <label class="check-item" id="ci-answer_questions">
-              <input type="checkbox" name="bot_purpose" value="Answer common questions" onchange="toggleCheck(this)" />
-              <span>Answer common questions</span>
-            </label>
-            <label class="check-item" id="ci-book_appointments">
-              <input type="checkbox" name="bot_purpose" value="Book or schedule appointments" onchange="toggleCheck(this)" />
-              <span>Book or schedule appointments</span>
-            </label>
-            <label class="check-item" id="ci-capture_leads">
-              <input type="checkbox" name="bot_purpose" value="Capture leads and contact info" onchange="toggleCheck(this)" />
-              <span>Capture leads and contact info</span>
-            </label>
-            <label class="check-item" id="ci-customer_support">
-              <input type="checkbox" name="bot_purpose" value="Handle customer support calls" onchange="toggleCheck(this)" />
-              <span>Handle customer support calls</span>
-            </label>
-            <label class="check-item" id="ci-hours_location">
-              <input type="checkbox" name="bot_purpose" value="Give callers hours and location" onchange="toggleCheck(this)" />
-              <span>Give callers your hours and location</span>
-            </label>
-            <label class="check-item" id="ci-route_calls">
-              <input type="checkbox" name="bot_purpose" value="Route calls to the right person" onchange="toggleCheck(this)" />
-              <span>Route calls to the right person</span>
-            </label>
-            <label class="check-item" id="ci-take_orders">
-              <input type="checkbox" name="bot_purpose" value="Take orders or service requests" onchange="toggleCheck(this)" />
-              <span>Take orders or service requests</span>
-            </label>
+            <label class="check-item"><input type="checkbox" name="bot_purpose" value="Answer common questions" onchange="toggleCheck(this)" /><span>Answer common questions</span></label>
+            <label class="check-item"><input type="checkbox" name="bot_purpose" value="Book or schedule appointments" onchange="toggleCheck(this)" /><span>Book or schedule appointments</span></label>
+            <label class="check-item"><input type="checkbox" name="bot_purpose" value="Capture leads and contact info" onchange="toggleCheck(this)" /><span>Capture leads and contact info</span></label>
+            <label class="check-item"><input type="checkbox" name="bot_purpose" value="Handle customer support calls" onchange="toggleCheck(this)" /><span>Handle customer support calls</span></label>
+            <label class="check-item"><input type="checkbox" name="bot_purpose" value="Give callers hours and location" onchange="toggleCheck(this)" /><span>Give callers your hours and location</span></label>
+            <label class="check-item"><input type="checkbox" name="bot_purpose" value="Route calls to the right person" onchange="toggleCheck(this)" /><span>Route calls to the right person</span></label>
+            <label class="check-item"><input type="checkbox" name="bot_purpose" value="Take orders or service requests" onchange="toggleCheck(this)" /><span>Take orders or service requests</span></label>
           </div>
           <span class="error-msg" id="purposes-error">Please select at least one option.</span>
         </div>
@@ -584,17 +1221,14 @@
 
         <div class="nav-buttons">
           <button class="btn btn-ghost" onclick="prevStep(2)">← Back</button>
-          <button class="btn btn-primary" onclick="nextStep(2)">
-            Continue
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
+          <button class="btn btn-primary" onclick="nextStep(2)">Continue <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
 
-      <!-- ── STEP 3 ── Your Services ────────────────────────────────── -->
+      <!-- STEP 3 -->
       <div class="step" id="step-3">
         <h2 class="step-headline">What do you offer?</h2>
-        <p class="step-desc">Your bot needs to know what you sell or do so it can help callers.</p>
+        <p class="step-desc">Your AI needs to know what you sell or do so it can answer callers like a pro.</p>
 
         <div class="field" id="field-services">
           <label for="services">List your main services or products</label>
@@ -603,23 +1237,20 @@
         </div>
 
         <div class="field">
-          <label for="pricing">Any pricing info you want the bot to share? <span class="opt">(optional)</span></label>
+          <label for="pricing">Any pricing info for the AI to share? <span class="opt">(optional)</span></label>
           <textarea id="pricing" placeholder="e.g. Cleanings start at $99, free consultations available"></textarea>
         </div>
 
         <div class="nav-buttons">
           <button class="btn btn-ghost" onclick="prevStep(3)">← Back</button>
-          <button class="btn btn-primary" onclick="nextStep(3)">
-            Continue
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
+          <button class="btn btn-primary" onclick="nextStep(3)">Continue <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
 
-      <!-- ── STEP 4 ── Hours & Contact ──────────────────────────────── -->
+      <!-- STEP 4 -->
       <div class="step" id="step-4">
         <h2 class="step-headline">When are you open?</h2>
-        <p class="step-desc">Your bot will use this to tell callers when they can reach you.</p>
+        <p class="step-desc">Your AI will handle calls 24/7 — and will know when a human needs to follow up.</p>
 
         <div class="field" id="field-hours">
           <label for="hours">Business hours</label>
@@ -642,218 +1273,150 @@
 
         <div class="nav-buttons">
           <button class="btn btn-ghost" onclick="prevStep(4)">← Back</button>
-          <button class="btn btn-primary" onclick="nextStep(4)">
-            Continue
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
+          <button class="btn btn-primary" onclick="nextStep(4)">Continue <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
 
-      <!-- ── STEP 5 ── Common Questions ─────────────────────────────── -->
+      <!-- STEP 5 -->
       <div class="step" id="step-5">
         <h2 class="step-headline">What do customers always ask you?</h2>
-        <p class="step-desc">Think of the questions you answer every single day. Your bot will know all of these.</p>
+        <p class="step-desc">Think of the questions you answer every single day. Your AI will handle every one of them — so you don't have to.</p>
 
         <div class="field" id="field-faqs">
-          <label for="faqs">Write your top questions and answers</label>
+          <label for="faqs">Your top questions and answers</label>
           <textarea id="faqs" class="tall" placeholder="Q: Do you accept walk-ins?&#10;A: Yes, walk-ins welcome during business hours.&#10;&#10;Q: Do you offer free estimates?&#10;A: Absolutely, all estimates are free."></textarea>
           <span class="error-msg">Please add at least one question and answer.</span>
         </div>
 
         <div class="nav-buttons">
           <button class="btn btn-ghost" onclick="prevStep(5)">← Back</button>
-          <button class="btn btn-primary" onclick="nextStep(5)">
-            Continue
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
+          <button class="btn btn-primary" onclick="nextStep(5)">Continue <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
 
-      <!-- ── STEP 6 ── Bot Personality ──────────────────────────────── -->
+      <!-- STEP 6 -->
       <div class="step" id="step-6">
-        <h2 class="step-headline">How should your bot sound?</h2>
-        <p class="step-desc">Give your bot a name and a personality that matches your brand.</p>
+        <h2 class="step-headline">Give your AI a personality</h2>
+        <p class="step-desc">Name your AI receptionist and set the tone that matches your business. Customers will feel right at home.</p>
 
         <div class="field" id="field-bot_name">
-          <label for="bot_name">Bot name</label>
+          <label for="bot_name">AI receptionist name</label>
           <input type="text" id="bot_name" placeholder="e.g. Jess, Alex, Max" />
-          <span class="error-msg">Please give your bot a name.</span>
+          <span class="error-msg">Please give your AI a name.</span>
         </div>
 
         <div class="field" id="field-tone">
-          <label>Tone</label>
+          <label>Tone / personality</label>
           <div class="checkbox-group" id="tone-group">
-            <label class="check-item">
-              <input type="checkbox" name="tone" value="Friendly and warm" onchange="toggleCheck(this)" />
-              <span>Friendly and warm</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="tone" value="Professional and polished" onchange="toggleCheck(this)" />
-              <span>Professional and polished</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="tone" value="Casual and conversational" onchange="toggleCheck(this)" />
-              <span>Casual and conversational</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="tone" value="Energetic and upbeat" onchange="toggleCheck(this)" />
-              <span>Energetic and upbeat</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="tone" value="Calm and reassuring" onchange="toggleCheck(this)" />
-              <span>Calm and reassuring</span>
-            </label>
+            <label class="check-item"><input type="checkbox" name="tone" value="Friendly and warm" onchange="toggleCheck(this)" /><span>Friendly and warm</span></label>
+            <label class="check-item"><input type="checkbox" name="tone" value="Professional and polished" onchange="toggleCheck(this)" /><span>Professional and polished</span></label>
+            <label class="check-item"><input type="checkbox" name="tone" value="Casual and conversational" onchange="toggleCheck(this)" /><span>Casual and conversational</span></label>
+            <label class="check-item"><input type="checkbox" name="tone" value="Energetic and upbeat" onchange="toggleCheck(this)" /><span>Energetic and upbeat</span></label>
+            <label class="check-item"><input type="checkbox" name="tone" value="Calm and reassuring" onchange="toggleCheck(this)" /><span>Calm and reassuring</span></label>
           </div>
           <span class="error-msg" id="tone-error">Please select at least one tone.</span>
         </div>
 
         <div class="field">
-          <label for="style_notes">Any specific phrases or words you want the bot to use or avoid? <span class="opt">(optional)</span></label>
+          <label for="style_notes">Phrases or words to use or avoid? <span class="opt">(optional)</span></label>
           <textarea id="style_notes" placeholder="e.g. Always say 'Great question!' — never say 'No problem'"></textarea>
         </div>
 
         <div class="nav-buttons">
           <button class="btn btn-ghost" onclick="prevStep(6)">← Back</button>
           <button class="btn btn-submit" id="submit-btn" onclick="submitForm()">
-            Send My Info to the Team
+            🚀 Build My Free AI Receptionist
           </button>
         </div>
       </div>
 
-      <!-- ── Thank You Screen ────────────────────────────────────────── -->
+      <!-- THANK YOU -->
       <div id="thank-you">
-        <div class="checkmark-circle">
+        <div class="success-circle">
           <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
         </div>
-        <h2>You're all set!</h2>
-        <p>Thanks for submitting your information. The Lehigh Valley AI Guys team will review everything and reach out within one business day to discuss next steps.</p>
+        <h2>You're all set! 🎉</h2>
+        <p>The Lehigh Valley AI Guys team will review your info and reach out within one business day. Your AI receptionist will be ready to test drive very soon — for free.</p>
+        <p>No cost. No commitment. Just a smarter way to run your business and never miss another call.</p>
         <p class="email-line">Questions? Email us at <a href="mailto:hello@lehighvalleyaiguys.com">hello@lehighvalleyaiguys.com</a></p>
       </div>
 
     </div><!-- /form-card -->
-  </main>
+  </section>
 
-  <!-- ─── Footer ──────────────────────────────────────────────────────── -->
+  <!-- ── FOOTER ──────────────────────────────────────────────────────── -->
   <footer>
-    Lehigh Valley AI Guys &middot; Serving the Lehigh Valley, PA &middot; lehighvalleyaiguys.com
+    <strong style="color:rgba(255,255,255,0.55)">Lehigh Valley AI Guys</strong>
+    &middot; Serving the Lehigh Valley, PA &middot;
+    <a href="https://lehighvalleyaiguys.com">lehighvalleyaiguys.com</a>
   </footer>
 
-  <!-- ─── JavaScript ──────────────────────────────────────────────────── -->
+  <!-- ── JAVASCRIPT ──────────────────────────────────────────────────── -->
   <script>
-    /* ── State ─────────────────────────────────────────────────────────── */
     const TOTAL_STEPS = 6;
-    let currentStep  = 1;
+    let currentStep = 1;
 
-    const STEP_NAMES = [
-      'Your Business',
-      'Bot Tasks',
-      'Your Services',
-      'Hours & Contact',
-      'Common Questions',
-      'Personality'
-    ];
-
-    /* ── Webhook URL ───────────────────────────────────────────────────── */
-    // Replace this with your actual n8n webhook URL when ready.
+    const STEP_NAMES = ['Your Business','Bot Tasks','Your Services','Hours & Contact','Common Questions','Personality'];
     const WEBHOOK_URL = 'https://stsylvainus.app.n8n.cloud/webhook/lv-ai-intake';
-    /* ── Progress UI ───────────────────────────────────────────────────── */
+
     function updateProgress(step) {
-      const pct = (step / TOTAL_STEPS) * 100;
-      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-fill').style.width = (step / TOTAL_STEPS * 100) + '%';
       document.getElementById('step-label').textContent = `Step ${step} of ${TOTAL_STEPS}`;
       document.getElementById('step-name').textContent  = STEP_NAMES[step - 1];
-
       document.querySelectorAll('.dot').forEach(dot => {
         const n = parseInt(dot.dataset.step);
-        dot.className = 'dot';
-        if (n < step)       dot.classList.add('done');
-        else if (n === step) dot.classList.add('active');
+        dot.className = 'dot' + (n < step ? ' done' : n === step ? ' active' : '');
       });
     }
 
-    /* ── Checkbox visual toggle ─────────────────────────────────────────── */
-    function toggleCheck(cb) {
-      cb.closest('.check-item').classList.toggle('checked', cb.checked);
-    }
+    function toggleCheck(cb) { cb.closest('.check-item').classList.toggle('checked', cb.checked); }
 
-    /* ── Validation ────────────────────────────────────────────────────── */
-    function clearErrors() {
-      document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
-    }
+    function clearErrors() { document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error')); }
 
-    function setError(fieldId) {
-      const el = document.getElementById(fieldId);
-      if (el) el.classList.add('field-error');
-    }
+    function setError(id) { const el = document.getElementById(id); if (el) el.classList.add('field-error'); }
 
     function validateStep(step) {
       clearErrors();
       let valid = true;
 
       if (step === 1) {
-        const bn = document.getElementById('business_name').value.trim();
-        const ind = document.getElementById('industry').value.trim();
-        const loc = document.getElementById('location').value.trim();
-        if (!bn)  { setError('field-business_name'); valid = false; }
-        if (!ind) { setError('field-industry');      valid = false; }
-        if (!loc) { setError('field-location');      valid = false; }
+        if (!document.getElementById('business_name').value.trim()) { setError('field-business_name'); valid = false; }
+        if (!document.getElementById('industry').value.trim())       { setError('field-industry');      valid = false; }
+        if (!document.getElementById('location').value.trim())       { setError('field-location');      valid = false; }
       }
-
       if (step === 2) {
-        const checked = document.querySelectorAll('input[name="bot_purpose"]:checked');
-        if (checked.length === 0) {
+        if (document.querySelectorAll('input[name="bot_purpose"]:checked').length === 0) {
           setError('field-bot_purposes');
           document.getElementById('purposes-error').style.display = 'block';
           valid = false;
-        } else {
-          document.getElementById('purposes-error').style.display = '';
-        }
+        } else { document.getElementById('purposes-error').style.display = ''; }
       }
-
-      if (step === 3) {
-        const svc = document.getElementById('services').value.trim();
-        if (!svc) { setError('field-services'); valid = false; }
-      }
-
+      if (step === 3) { if (!document.getElementById('services').value.trim()) { setError('field-services'); valid = false; } }
       if (step === 4) {
-        const hrs   = document.getElementById('hours').value.trim();
-        const phone = document.getElementById('phone').value.trim();
+        if (!document.getElementById('hours').value.trim())  { setError('field-hours'); valid = false; }
+        if (!document.getElementById('phone').value.trim())  { setError('field-phone'); valid = false; }
         const email = document.getElementById('email').value.trim();
-        if (!hrs)   { setError('field-hours'); valid = false; }
-        if (!phone) { setError('field-phone'); valid = false; }
         if (!email || !email.includes('@')) { setError('field-email'); valid = false; }
       }
-
-      if (step === 5) {
-        const faqs = document.getElementById('faqs').value.trim();
-        if (!faqs) { setError('field-faqs'); valid = false; }
-      }
-
+      if (step === 5) { if (!document.getElementById('faqs').value.trim()) { setError('field-faqs'); valid = false; } }
       if (step === 6) {
-        const name = document.getElementById('bot_name').value.trim();
-        const tones = document.querySelectorAll('input[name="tone"]:checked');
-        if (!name)          { setError('field-bot_name'); valid = false; }
-        if (tones.length === 0) {
+        if (!document.getElementById('bot_name').value.trim()) { setError('field-bot_name'); valid = false; }
+        if (document.querySelectorAll('input[name="tone"]:checked').length === 0) {
           setError('field-tone');
           document.getElementById('tone-error').style.display = 'block';
           valid = false;
-        } else {
-          document.getElementById('tone-error').style.display = '';
-        }
+        } else { document.getElementById('tone-error').style.display = ''; }
       }
 
-      // Scroll to first error smoothly
       if (!valid) {
-        const firstErr = document.querySelector('.field-error');
-        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const first = document.querySelector('.field-error');
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-
       return valid;
     }
 
-    /* ── Step Navigation ───────────────────────────────────────────────── */
     function showStep(n) {
       document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
       document.getElementById(`step-${n}`).classList.add('active');
@@ -862,35 +1425,20 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function nextStep(from) {
-      if (!validateStep(from)) return;
-      showStep(from + 1);
-    }
+    function nextStep(from) { if (!validateStep(from)) return; showStep(from + 1); }
+    function prevStep(from) { clearErrors(); showStep(from - 1); }
 
-    function prevStep(from) {
-      clearErrors();
-      showStep(from - 1);
-    }
-
-    /* ── Build JSON Payload ────────────────────────────────────────────── */
     function buildPayload() {
-      // bot_purposes: all checked options + optional free-text
-      const purposeChecked = [...document.querySelectorAll('input[name="bot_purpose"]:checked')]
-        .map(cb => cb.value);
-      const purposeOther   = document.getElementById('bot_purposes_other').value.trim();
-      if (purposeOther) purposeChecked.push(purposeOther);
-
-      // tone: all checked
-      const toneChecked = [...document.querySelectorAll('input[name="tone"]:checked')]
-        .map(cb => cb.value);
-
+      const purposes = [...document.querySelectorAll('input[name="bot_purpose"]:checked')].map(cb => cb.value);
+      const other    = document.getElementById('bot_purposes_other').value.trim();
+      if (other) purposes.push(other);
       return {
         timestamp:     new Date().toISOString(),
         business_name: document.getElementById('business_name').value.trim(),
         industry:      document.getElementById('industry').value.trim(),
         location:      document.getElementById('location').value.trim(),
         website:       document.getElementById('website').value.trim(),
-        bot_purposes:  purposeChecked.join(', '),
+        bot_purposes:  purposes.join(', '),
         services:      document.getElementById('services').value.trim(),
         pricing:       document.getElementById('pricing').value.trim(),
         hours:         document.getElementById('hours').value.trim(),
@@ -898,34 +1446,19 @@
         email:         document.getElementById('email').value.trim(),
         faqs:          document.getElementById('faqs').value.trim(),
         bot_name:      document.getElementById('bot_name').value.trim(),
-        tone:          toneChecked.join(', '),
+        tone:          [...document.querySelectorAll('input[name="tone"]:checked')].map(cb => cb.value).join(', '),
         style_notes:   document.getElementById('style_notes').value.trim()
       };
     }
 
-    /* ── Submit ────────────────────────────────────────────────────────── */
     async function submitForm() {
       if (!validateStep(6)) return;
-
       const btn = document.getElementById('submit-btn');
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span> Sending…';
-
-      const payload = buildPayload();
-
       try {
-        await fetch(WEBHOOK_URL, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(payload)
-        });
-      } catch (err) {
-        // Even if the webhook isn't configured yet, show the thank-you screen
-        // so the UX is correct. Log the error for debugging.
-        console.warn('Webhook error (non-blocking):', err);
-      }
-
-      // Hide form UI, show thank-you
+        await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildPayload()) });
+      } catch (err) { console.warn('Webhook error (non-blocking):', err); }
       document.getElementById('progress-wrap').style.display = 'none';
       document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
       document.getElementById('thank-you').style.display = 'block';
