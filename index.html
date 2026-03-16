@@ -566,6 +566,229 @@
       line-height: 1.5;
     }
 
+    /* ── PRICING SECTION ─────────────────────────────────────────── */
+    .pricing {
+      background: var(--off-white);
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    .pricing-header {
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    .pricing-header h2 {
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 900;
+      color: var(--charcoal);
+      letter-spacing: -0.6px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .pricing-header h2 span { color: var(--blue); }
+
+    .pricing-header p {
+      color: var(--mid);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .pricing-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 860px;
+      margin: 0 auto 36px;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) { .pricing-layout { grid-template-columns: 1fr; } }
+
+    /* Main price card */
+    .price-card {
+      background: var(--white);
+      border: 2px solid var(--blue);
+      border-radius: 18px;
+      padding: 40px 36px;
+      text-align: left;
+      box-shadow: 0 8px 40px rgba(37,99,235,0.14);
+      position: relative;
+    }
+
+    .price-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 5px 16px;
+      border-radius: 99px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .price-amount {
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .price-dollar {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-top: 8px;
+    }
+
+    .price-num {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--charcoal);
+      letter-spacing: -3px;
+      line-height: 1;
+    }
+
+    .price-per {
+      font-size: 0.9rem;
+      color: var(--mid);
+      font-weight: 500;
+      align-self: flex-end;
+      padding-bottom: 6px;
+    }
+
+    .price-label {
+      font-size: 0.85rem;
+      color: var(--mid);
+      margin-bottom: 28px;
+    }
+
+    .price-includes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .price-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: var(--charcoal);
+      line-height: 1.45;
+    }
+
+    .price-includes .pi-check {
+      width: 20px;
+      height: 20px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .price-includes .pi-check svg {
+      width: 10px; height: 10px;
+      stroke: white; stroke-width: 3; fill: none;
+    }
+
+    /* Credits / transparency card */
+    .credits-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .credit-block {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 26px;
+      text-align: left;
+    }
+
+    .credit-block-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .credit-block h4 {
+      font-size: 0.97rem;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+
+    .credit-block p {
+      font-size: 0.87rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .credit-block p strong { color: var(--charcoal); font-weight: 700; }
+
+    .credit-block.highlight-block {
+      background: rgba(16,185,129,0.05);
+      border-color: rgba(16,185,129,0.3);
+    }
+
+    .credit-block.highlight-block h4 { color: var(--green-dark); }
+
+    /* Comparison bar */
+    .comparison-bar {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 28px;
+      max-width: 860px;
+      margin: 0 auto 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+      text-align: center;
+    }
+
+    .comp-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .comp-item .comp-price {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .comp-item .comp-desc {
+      font-size: 0.78rem;
+      color: var(--mid);
+      font-weight: 500;
+    }
+
+    .comp-item.bad .comp-price  { color: #EF4444; }
+    .comp-item.good .comp-price { color: var(--green-dark); }
+
+    .comp-divider {
+      font-size: 1.4rem;
+      color: var(--border);
+      font-weight: 300;
+    }
+
     /* ── FORM SECTION ────────────────────────────────────────────── */
     .form-section {
       padding: 64px 16px 88px;
@@ -983,8 +1206,8 @@
           <div class="stat-label">your AI picks up — nights, weekends, holidays</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">$0</div>
-          <div class="stat-label">to get started — test drive it free, no obligation</div>
+          <div class="stat-num">$199</div>
+          <div class="stat-label">/mo after your free trial — fraction of a real receptionist</div>
         </div>
       </div>
 
@@ -1105,15 +1328,6 @@
             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="promise-item-text">
-            <strong>Affordable for any small business</strong>
-            <span>Way less than a part-time receptionist. Start completely free to see it work.</span>
-          </div>
-        </div>
-        <div class="promise-item">
-          <div class="promise-check">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div class="promise-item-text">
             <strong>Frees your staff for what matters</strong>
             <span>Stop interrupting your team to answer the phone. Let AI handle calls so your people focus on higher-value work.</span>
           </div>
@@ -1125,6 +1339,91 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
+  </section>
+
+  <!-- ── PRICING ───────────────────────────────────────────────────── -->
+  <section class="pricing">
+
+    <div class="pricing-header">
+      <p class="section-eyebrow" style="color:var(--blue)">Simple, Transparent Pricing</p>
+      <h2>No Surprises. <span>No Fine Print.</span></h2>
+      <p>We believe in full transparency — you'll always know exactly what you're paying and why. And you own everything.</p>
+    </div>
+
+    <div class="pricing-layout">
+
+      <!-- Price card -->
+      <div class="price-card">
+        <div class="price-badge">Our Monthly Fee</div>
+        <div class="price-amount">
+          <span class="price-dollar">$</span>
+          <span class="price-num">199</span>
+          <span class="price-per">/mo</span>
+        </div>
+        <div class="price-label">Everything you need to run your AI receptionist</div>
+        <ul class="price-includes">
+          <li>
+            <span class="pi-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Custom AI receptionist built for your business
+          </li>
+          <li>
+            <span class="pi-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            24/7 call answering, lead capture &amp; appointment booking
+          </li>
+          <li>
+            <span class="pi-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Ongoing setup, tuning &amp; support from our team
+          </li>
+          <li>
+            <span class="pi-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Updates and improvements as your business evolves
+          </li>
+          <li>
+            <span class="pi-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Test drive free — no charge until you decide to go live
+          </li>
+        </ul>
+      </div>
+
+      <!-- Transparency / credits cards -->
+      <div class="credits-card">
+        <div class="credit-block">
+          <div class="credit-block-icon">⚡</div>
+          <h4>AI Usage Credits — Paid by You, Directly</h4>
+          <p>On top of our $199/mo fee, you'll pay a small amount for AI usage credits (typically <strong>a few dollars to low tens of dollars per month</strong> depending on call volume). These go directly to the AI provider — not to us.</p>
+        </div>
+        <div class="credit-block highlight-block">
+          <div class="credit-block-icon">🔓</div>
+          <h4>You Own Everything — Always</h4>
+          <p>Your AI accounts, your phone number, your data. <strong>No lock-in. No gotchas.</strong> We set it up and manage it for you, but the accounts are yours. If you ever want to walk away, everything comes with you.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Comparison bar -->
+    <div class="comparison-bar">
+      <div class="comp-item bad">
+        <span class="comp-price">$2,500+</span>
+        <span class="comp-desc">Part-time receptionist / mo</span>
+      </div>
+      <span class="comp-divider">vs</span>
+      <div class="comp-item good">
+        <span class="comp-price">~$199</span>
+        <span class="comp-desc">Your AI receptionist / mo</span>
+      </div>
+      <span class="comp-divider">+</span>
+      <div class="comp-item" style="color:var(--mid)">
+        <span class="comp-price" style="font-size:1.1rem;color:var(--mid)">a few $</span>
+        <span class="comp-desc">AI credits (usage-based)</span>
+      </div>
+    </div>
+
+    <a href="#lead-form" class="cta-btn" style="background:var(--blue);box-shadow:0 6px 28px rgba(37,99,235,0.35);">
+      Try It Free Before You Commit
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+
   </section>
 
   <!-- ── FORM SECTION ───────────────────────────────────────────────── -->
