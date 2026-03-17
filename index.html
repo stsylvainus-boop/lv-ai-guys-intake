@@ -1721,7 +1721,8 @@
       document.getElementById(`step-${n}`).classList.add('active');
       updateProgress(n);
       currentStep = n;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const formTop = document.getElementById('lead-form').getBoundingClientRect().top + window.scrollY - 20;
+      window.scrollTo({ top: formTop, behavior: 'smooth' });
     }
 
     function nextStep(from) { if (!validateStep(from)) return; showStep(from + 1); }
